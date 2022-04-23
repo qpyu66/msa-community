@@ -27,7 +27,7 @@ public class CommunityHandler {
     }
 
     // 게시글 작성
-    public Mono<ServerResponse> writeBoardHandler(ServerRequest request) {
+    public Mono<ServerResponse> writeCommunity(ServerRequest request) {
         Map<String, Object> result = new HashMap<>();
         //lectureService... 서비스로직
         return ServerResponse.ok()

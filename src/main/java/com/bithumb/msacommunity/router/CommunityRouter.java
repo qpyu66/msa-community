@@ -19,8 +19,8 @@ public class CommunityRouter {
     public RouterFunction<ServerResponse> route() {
         return RouterFunctions
                 .route(GET("/community/list"), communityHandler::viewNoticeBoardHandler)                    // 게시판 열람
-                .andRoute(POST("/community/board/write"), communityHandler::writeBoardHandler)                // 게시글 작성
-                .andRoute(POST("/community/comment/set"), communityHandler::writeCommentHandler)            // 댓글 작성
+                .andRoute(POST("/community/write"), communityHandler::writeCommunity)                // 게시글 작성
+                .andRoute(POST("/community/reply/write"), communityHandler::writeCommentHandler)            // 댓글 작성
                 .andRoute(POST("/community/operator/show"), communityHandler::showNoticeContentYnHandler)   // 게시글, 댓글 숨김처리
                 ;
     }

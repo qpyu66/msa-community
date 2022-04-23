@@ -11,10 +11,10 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.util.Date;
 
 @Table(value = "community")
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class Community {
     @Id
     private Integer communityId;
