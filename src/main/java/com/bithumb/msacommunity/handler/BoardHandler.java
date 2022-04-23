@@ -1,7 +1,6 @@
 package com.bithumb.msacommunity.handler;
 
 import com.bithumb.msacommunity.domain.Board;
-import com.bithumb.msacommunity.domain.Community;
 import com.bithumb.msacommunity.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -22,6 +21,23 @@ public class BoardHandler {
     public Mono<ServerResponse> getBoardList(ServerRequest request) {
         return (Mono<ServerResponse>) ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON);
+    }
+
+    /**
+     * 게시글 조회하는 메소드
+     * @param request ServerRequest
+     * @return boardContent 를 반환 empty 상태라면 Not Found
+     */
+    public Mono<ServerResponse> getBoardContent(ServerRequest request) {
+        Integer boardId = Integer.valueOf(request.pathVariable("id"));
+        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+        Mono<Board> boardMono = request.bodyToMono(Board.class)
+                .flatMap(board -> boardService.findById(boardId));
+
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(boardMono, Map.class)
+                .switchIfEmpty(notFound);
     }
 
     // 게시글 작성
