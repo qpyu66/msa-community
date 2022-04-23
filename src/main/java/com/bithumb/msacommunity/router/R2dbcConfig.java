@@ -1,4 +1,4 @@
-package com.bithumb.msacommunity.config;
+package com.bithumb.msacommunity.router;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.context.annotation.Configuration;
