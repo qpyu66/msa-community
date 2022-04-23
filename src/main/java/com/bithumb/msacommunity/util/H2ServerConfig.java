@@ -1,4 +1,4 @@
-package com.bithumb.msacommunity.router;
+package com.bithumb.msacommunity.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.h2.tools.Server;
