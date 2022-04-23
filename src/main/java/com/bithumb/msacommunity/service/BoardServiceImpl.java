@@ -2,6 +2,8 @@ package com.bithumb.msacommunity.service;
 
 import com.bithumb.msacommunity.domain.Board;
 import com.bithumb.msacommunity.repository.BoardRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,6 +18,12 @@ public class BoardServiceImpl implements BoardService {
     public BoardServiceImpl(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
+
+    @Override
+    public Flux<Board> findAll() {
+        return this.boardRepository.findAll();
+    }
+
 
     // 게시글 조회
     @Override

@@ -7,9 +7,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Map;
+
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
 @Component
 @RequiredArgsConstructor
@@ -17,10 +21,18 @@ public class BoardHandler {
 
     private final BoardService boardService;
 
-    //게시글 목록
+    /**
+     * 게시글 목록을 가져오는 메소드
+     * @param request ServerRequest
+     * @return flux 를 list 에 모은 후 flatmap 하면서 response body 에 넣기
+     */
     public Mono<ServerResponse> getBoardList(ServerRequest request) {
-        return (Mono<ServerResponse>) ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON);
+        Flux<Board> boardFlux = boardService.findAll();
+        return boardFlux.collectList().flatMap(b ->
+            b.size() < 1 ?
+                ServerResponse.status(404).build()
+                :ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(fromObject(b))
+        );
     }
 
     /**
