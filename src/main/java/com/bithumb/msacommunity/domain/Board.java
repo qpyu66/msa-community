@@ -6,28 +6,26 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
-
 import java.util.Date;
 
-@Table(value = "reply")
-@AllArgsConstructor
+@Table(value = "community")
 @Getter
 @Setter
 @ToString
-public class Reply {
+@AllArgsConstructor
+public class Board {
     @Id
-    private Integer replyId;
+    private Integer id;
 
-    private Integer boardId;
+    private String title;
 
-    private Integer memberId;
+    private String content;
 
-    private String replyContent;
+    private Integer visibleYn;
 
-    private Integer replyVisibleYn;
+    private String memberId;
 
     private Date insertDt;
 
     private Date updateDt;
-
 }

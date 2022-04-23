@@ -7,22 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
-
-@Service
-@RequiredArgsConstructor
-public class CommunityService {
-    private final CommunityRepository communityrepository;
-    private final ReplyRepository replyRepository;
+public interface CommunityService {
 
     // 게시판 열람
 
 
+
     // 게시글 작성
-//    @Transactional
-//    public Mono<Community> saveCommunity(Community community) {
-//        return communityrepository.save(community);
-//    }
+    Mono<Community> saveBoard(Community community);
 
 
     // 댓글 작성

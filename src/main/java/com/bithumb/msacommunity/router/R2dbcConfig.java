@@ -1,4 +1,4 @@
-package com.bithumb.msacommunity.util;
+package com.bithumb.msacommunity.router;
 
 import io.r2dbc.h2.H2ConnectionConfiguration;
 import io.r2dbc.h2.H2ConnectionFactory;
