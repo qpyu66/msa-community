@@ -9,18 +9,18 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
+@Table(value = "reply")
 @AllArgsConstructor
 @Getter
 @Setter
-@Table
 @ToString
 public class Reply {
     @Id
-    private String replyId;
-    private String boardId;
-    private String memberId;
+    private Integer replyId;
+    private Integer boardId;
+    private Integer memberId;
     private String commentContent;
-    private int commentShowYN;
+    private Integer commentShowYN;
     private Date insertDt;
     private Date updateDt;
 
