@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.nest;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration()
 public class CommunityRouter {
 
     CommunityHandler communityHandler = new CommunityHandler();
