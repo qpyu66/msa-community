@@ -1,6 +1,5 @@
 package com.bithumb.msacommunity.handler;
 
-import com.bithumb.msacommunity.domain.Board;
 import com.bithumb.msacommunity.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

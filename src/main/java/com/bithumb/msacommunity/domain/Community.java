@@ -9,19 +9,19 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
+@Table(value = "community")
 @AllArgsConstructor
 @Getter
 @Setter
-@Table
 @ToString
-public class Board {
-    Long id;
-    String board_id;
-    String board_title;
-    String board_content;
-    int board_show_yn;
-    String member_id;
-    Date insert_dt;
-    Date update_dt;
+public class Community {
+    @Id
+    private Integer communityId;
+    private String communityTitle;
+    private String communityContent;
+    private int communityShowYN;
+    private String memberId;
+    private Date insertDt;
+    private Date updateDt;
 
 }

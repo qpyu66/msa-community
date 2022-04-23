@@ -3,9 +3,9 @@ server:
 
 spring:
   r2dbc:
-    url: r2dbc:h2:mem:///test
-    username: community
-    password: community
+    url: r2dbc:h2:mem:msa
+    username:
+    password:
 logging:
   level:
     org:
