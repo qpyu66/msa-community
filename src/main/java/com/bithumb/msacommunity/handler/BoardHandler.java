@@ -34,6 +34,9 @@ public class BoardHandler {
                 .body(boardMono, Map.class);
     }
 
+    public Mono<ServerResponse> offArticle(ServerRequest req) {
+        return null;
+    }
 
 
 }

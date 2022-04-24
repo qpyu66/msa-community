@@ -2,6 +2,7 @@ package com.bithumb.msacommunity.service;
 
 import com.bithumb.msacommunity.domain.Community;
 import com.bithumb.msacommunity.repository.CommunityRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

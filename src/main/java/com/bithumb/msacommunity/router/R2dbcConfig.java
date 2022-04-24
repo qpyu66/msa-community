@@ -32,6 +32,7 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
     public ConnectionFactoryInitializer h2DbInitializer() {
         ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+        resourceDatabasePopulator.addScript(new ClassPathResource("board.sql"));
         resourceDatabasePopulator.addScript(new ClassPathResource("community.sql"));
         resourceDatabasePopulator.addScript(new ClassPathResource("reply.sql"));
 
