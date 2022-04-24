@@ -5,5 +5,9 @@ import reactor.core.publisher.Mono;
 
 public interface ReplyService  {
 
-    Mono<Reply> hideReply(Integer id);
+    //댓글 작성
+    Mono saveReply(Reply reply);
+
+    //댓글 숨김
+    Mono hideReply(Integer id);
 }

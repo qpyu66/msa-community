@@ -26,9 +26,9 @@ public class Board {
 
     private String content;
 
-    private int visibleyn;
+    private Integer visibleyn;
 
-    private String memberid;
+    private Integer memberid;
 
     @CreatedDate
     private LocalDateTime insertdt;
