@@ -2,6 +2,7 @@ package com.bithumb.msacommunity.handler;
 
 import com.bithumb.msacommunity.domain.Board;
 
+import com.bithumb.msacommunity.domain.Reply;
 import com.bithumb.msacommunity.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -57,8 +58,13 @@ public class BoardHandler {
 //                        .body(boardService.saveBoard(product), Board.class));
 //    }
 
-    public Mono<ServerResponse> offArticle(ServerRequest req) {
-        return null;
+    public Mono<ServerResponse> hideArticle(ServerRequest req) {
+        Mono<Board> mono = req.bodyToMono(Board.class)
+                .flatMap(arti -> boardService.hideBoard(arti.getId())).log();
+
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(mono, Reply.class).log("writeBoard is : ");
     }
 
 

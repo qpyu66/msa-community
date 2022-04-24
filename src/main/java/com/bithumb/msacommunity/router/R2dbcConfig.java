@@ -13,11 +13,13 @@ import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import static reactor.netty.http.HttpProtocol.H2C;
 
 @Configuration
 @EnableR2dbcRepositories
+@EnableTransactionManagement
 //@Profile("h2")
 public class R2dbcConfig extends AbstractR2dbcConfiguration {
 
