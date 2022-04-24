@@ -15,24 +15,8 @@ import java.util.Date;
 @SpringBootTest
 class MsaCommunityApplicationTests {
 
-    private final BoardService boardService;
-
-    MsaCommunityApplicationTests(BoardService boardService) {
-        this.boardService = boardService;
-    }
-
     @Test
     void contextLoads() {
     }
-
-//    @Test
-//    public void save() {
-//        Board b = new Board(2,"t2","c2",1,"2","" ,"");
-//        Mono<Board> profileMono = this.boardService.saveBoard(b);
-//        StepVerifier
-//                .create(profileMono)
-//                .expectNextMatches(saved -> StringUtils.hasText(String.valueOf(saved.getId())))
-//                .verifyComplete();
-//    }
 
 }

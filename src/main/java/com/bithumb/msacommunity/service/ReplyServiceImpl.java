@@ -20,12 +20,12 @@ public class ReplyServiceImpl implements ReplyService {
 
     //댓글 저장
     @Override
-    public Mono saveReply(Reply reply) {
+    public Mono<Reply> saveReply(Reply reply) {
         return this.replyRepository.save(reply);
     }
 
     //댓글 숨김
-    public Mono hideReply(Integer replyId) {
+    public Mono<Reply> hideReply(Integer replyId) {
         return replyRepository.findById(replyId)
                 .filter(Objects::nonNull) //있는 댓번일때
                 .filter(item -> item.getReplyvisibleyn()==0) //show상태일떄
