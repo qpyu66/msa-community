@@ -21,9 +21,9 @@ public class ReplyServiceImpl implements ReplyService {
     public Mono hideReply(Integer replyId) {
         return replyRepository.findById(replyId)
                 .filter(Objects::nonNull) //있는 댓번일때
-                .filter(item -> item.getReplyVisibleYn()==0) //show상태일때
+//                .filter(item -> item.getReplyVisibleYn()==0) //show상태일때
                 .doOnNext(item -> {
-                    item.setReplyVisibleYn(1);
+//                    item.setReplyVisibleYn(1);
                     replyRepository.save(item);
                 }).log();
     }
