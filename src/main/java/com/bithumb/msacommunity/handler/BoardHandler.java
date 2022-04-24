@@ -51,7 +51,7 @@ public class BoardHandler {
 //    }
 //
 
-
+   //게시글 숨기기
     public Mono<ServerResponse> hideArticle(ServerRequest req) {
         Mono<Board> mono = req.bodyToMono(Board.class)
                 .flatMap(arti -> boardService.hideBoard(arti.getId())).log();

@@ -18,10 +18,8 @@ public class BoardRouter {
         return RouterFunctions
                 .route(GET("/community/list"), boardHandler::getBoardList)                    // 게시판 목록
 //                .andRoute(POST("/community/write/{id}"), boardHandler::)                 // 게시판 열람
-                .andRoute(POST("/community/write").and(accept(MediaType.APPLICATION_JSON)), boardHandler::writeBoard)
-                .andRoute(POST("/community/article/hide").and(accept(MediaType.APPLICATION_JSON)), boardHandler::hideArticle)   // 게시글 작성
-//                .POST("/community/write", RequestPredicates.contentType(MediaType.APPLICATION_JSON), boardHandler::writeBoard)                // 게시글 작성
-
+                .andRoute(POST("/community/write").and(accept(MediaType.APPLICATION_JSON)), boardHandler::writeBoard) // 게시글 작성
+                .andRoute(POST("/community/article/hide").and(accept(MediaType.APPLICATION_JSON)), boardHandler::hideArticle)   // 게시글 숨김
                 ;
     }
 

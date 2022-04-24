@@ -24,15 +24,13 @@ dependencies {
     implementation 'com.h2database:h2'
     implementation 'io.r2dbc:r2dbc-h2'
     implementation group: 'org.json', name: 'json', version: '20090211'
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
-
     compileOnly 'org.projectlombok:lombok'
-//    runtimeOnly 'com.h2database:h2'
-//    runtimeOnly 'io.r2dbc:r2dbc-h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
+    //    runtimeOnly 'com.h2database:h2'
+    //    runtimeOnly 'io.r2dbc:r2dbc-h2'
 
 }
 

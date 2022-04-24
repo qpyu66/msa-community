@@ -1,5 +1,6 @@
 package com.bithumb.msacommunity.service;
 
+import com.bithumb.msacommunity.domain.Reply;
 import com.bithumb.msacommunity.repository.ReplyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,13 @@ public class ReplyServiceImpl implements ReplyService {
         this.replyRepository = replyRepository;
     }
 
-    //댓글 숨기기
+    //댓글 저장
+    @Override
+    public Mono saveReply(Reply reply) {
+        return this.replyRepository.save(reply);
+    }
+
+    //댓글 숨김
     public Mono hideReply(Integer replyId) {
         return replyRepository.findById(replyId)
                 .filter(Objects::nonNull) //있는 댓번일때

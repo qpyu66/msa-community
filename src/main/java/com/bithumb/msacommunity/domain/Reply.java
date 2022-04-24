@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -27,8 +29,10 @@ public class Reply {
 
     private Integer replyvisibleyn;
 
+    @CreatedDate
     private LocalDateTime insertdt;
 
+    @LastModifiedDate
     private LocalDateTime updatedt;
 
 }
