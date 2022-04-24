@@ -57,6 +57,9 @@ public class BoardHandler {
 //                        .body(boardService.saveBoard(product), Board.class));
 //    }
 
+    public Mono<ServerResponse> offArticle(ServerRequest req) {
+        return null;
+    }
 
 
 }
