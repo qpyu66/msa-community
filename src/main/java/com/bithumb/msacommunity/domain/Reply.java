@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Table(value = "reply")
@@ -26,8 +27,8 @@ public class Reply {
 
     private Integer replyvisibleyn;
 
-    private Date insertdt;
+    private LocalDateTime insertdt;
 
-    private Date updatedt;
+    private LocalDateTime updatedt;
 
 }
