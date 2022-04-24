@@ -1,9 +1,7 @@
 package com.bithumb.msacommunity.router;
 
 import com.bithumb.msacommunity.domain.Board;
-import com.bithumb.msacommunity.domain.Reply;
 import com.bithumb.msacommunity.handler.BoardHandler;
-import com.bithumb.msacommunity.handler.ReplyHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -17,7 +15,7 @@ public class BoardRouter {
     public RouterFunction<ServerResponse> route(BoardHandler boardHandler) {
         return RouterFunctions
                 .route(GET("/community/list"), boardHandler::getBoardList)                    // 게시판 목록
-//                .andRoute(POST("/community/write/{id}"), boardHandler::)                 // 게시판 열람
+//                .andRoute(POST("/community/board/{id}"), boardHandler::)                 // 게시판 열람
                 .andRoute(POST("/community/write").and(accept(MediaType.APPLICATION_JSON)), boardHandler::writeBoard) // 게시글 작성
                 .andRoute(POST("/community/article/hide").and(accept(MediaType.APPLICATION_JSON)), boardHandler::hideArticle)   // 게시글 숨김
                 ;

@@ -1,21 +1,15 @@
 package com.bithumb.msacommunity.handler;
 
-import com.bithumb.msacommunity.domain.Board;
 import com.bithumb.msacommunity.domain.Reply;
 import com.bithumb.msacommunity.service.ReplyService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.io.DataInput;
-import java.util.HashMap;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
