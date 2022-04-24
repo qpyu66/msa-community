@@ -4,11 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-@Table(value = "community")
+@Table(value = "board")
 @Getter
 @Setter
 @ToString
@@ -21,11 +26,13 @@ public class Board {
 
     private String content;
 
-    private Integer visibleYn;
+    private int visibleYn;
 
     private String memberId;
 
-    private Date insertDt;
+    @CreatedDate
+    private LocalDateTime insertDt;
 
-    private Date updateDt;
+    @LastModifiedDate
+    private LocalDateTime updateDt;
 }

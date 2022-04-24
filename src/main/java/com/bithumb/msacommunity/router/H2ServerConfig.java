@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
 
 import java.sql.SQLException;
 
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 //@Profile("h2")
 @Slf4j
 @Configuration
+@EnableR2dbcAuditing
 public class H2ServerConfig {
     private Server webServer;
     Integer h2ConsolePort = 9092;

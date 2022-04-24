@@ -5,6 +5,8 @@ import com.bithumb.msacommunity.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.Date;
+
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -19,6 +21,7 @@ public class BoardServiceImpl implements BoardService {
     public Mono<Board> saveBoard(Board board) {
         return this.boardRepository.save(board);
     }
+
 
 
 }
