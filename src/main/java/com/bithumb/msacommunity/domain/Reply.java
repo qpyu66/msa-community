@@ -16,18 +16,18 @@ import java.util.Date;
 @ToString
 public class Reply {
     @Id
-    private Integer replyId;
+    private Integer replyid;
 
-    private Integer boardId;
+    private Integer boardid;
 
-    private Integer memberId;
+    private Integer memberid;
 
-    private String replyContent;
+    private String replycontent;
 
-    private Integer replyVisibleYn;
+    private Integer replyvisibleyn;
 
-    private Date insertDt;
+    private Date insertdt;
 
-    private Date updateDt;
+    private Date updatedt;
 
 }

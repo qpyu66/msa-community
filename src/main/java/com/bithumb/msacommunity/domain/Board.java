@@ -26,13 +26,13 @@ public class Board {
 
     private String content;
 
-    private int visibleYn;
+    private int visibleyn;
 
-    private String memberId;
+    private String memberid;
 
     @CreatedDate
-    private LocalDateTime insertDt;
+    private LocalDateTime insertdt;
 
     @LastModifiedDate
-    private LocalDateTime updateDt;
+    private LocalDateTime updatedt;
 }
