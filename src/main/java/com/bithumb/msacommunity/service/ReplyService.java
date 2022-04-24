@@ -1,8 +1,9 @@
 package com.bithumb.msacommunity.service;
 
+import com.bithumb.msacommunity.domain.Reply;
 import reactor.core.publisher.Mono;
 
 public interface ReplyService  {
 
-    Mono hideReply(Integer id);
+    Mono<Reply> hideReply(Integer id);
 }
