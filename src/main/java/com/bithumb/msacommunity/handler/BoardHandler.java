@@ -1,10 +1,12 @@
 package com.bithumb.msacommunity.handler;
 
+import ch.qos.logback.classic.LoggerContext;
 import com.bithumb.msacommunity.domain.Board;
 
 import com.bithumb.msacommunity.domain.Reply;
 import com.bithumb.msacommunity.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.h2.message.Trace;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -33,13 +35,14 @@ public class BoardHandler {
     // 게시글 작성
     public Mono<ServerResponse> writeBoard(ServerRequest request) {
         Mono<Board> boardMono = request.bodyToMono(Board.class)
-                .flatMap(board -> boardService.saveBoard(board)).log("boardMono is : ");
+                .flatMap(board -> boardService.saveBoard(board))
+                .log("boardMono is : ");
 
         return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(boardMono, Board.class).log("writeBoard is : ");
+                .contentType(APPLICATION_JSON)
+                .body(boardMono, Board.class).log("writeBoard is : ")
+                .onErrorResume(error -> ServerResponse.badRequest().build());
     }
-
 //    public Mono<ServerResponse> writeBoard(ServerRequest request) {
 //        return request.bodyToMono(Board.class)
 //                .flatMap(board -> boardService.saveBoard(board))
@@ -47,16 +50,7 @@ public class BoardHandler {
 //                        .contentType(APPLICATION_JSON).body(BodyInserters.fromValue(board))).log("writeBoard is : ");
 //    }
 //
-//    public Mono<ServerResponse> writeBoard2(ServerRequest request) {
-////        String id = request.pathVariable("memberId");
-////        System.out.println("saveBoard > "+id);
-//        Mono<Board> productMono = request.bodyToMono(Board.class);
-//
-//        return productMono.flatMap(product ->
-//                ServerResponse.status(HttpStatus.CREATED)
-//                        .contentType(APPLICATION_JSON)
-//                        .body(boardService.saveBoard(product), Board.class));
-//    }
+
 
     public Mono<ServerResponse> hideArticle(ServerRequest req) {
         Mono<Board> mono = req.bodyToMono(Board.class)
