@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -33,12 +34,12 @@ public class ReplyServiceImpl implements ReplyService {
         return replyRepository.findById(replyId)
                 .switchIfEmpty(Mono.error(new RuntimeException(">>>>not found exception")))
                 .log()
-                .filter(item -> item.getReplyvisibleyn()==0) //show상태일떄
+//                .filter(item -> item.getReplyvisibleyn()==0) //show상태일떄
                 .doOnNext(item -> item.setReplyvisibleyn(1))
                 .flatMap(item -> replyRepository.save(item))
                 .log()
                 .onErrorResume(tr -> {
-                    return Mono.just(new Reply(-1, -1, -1, "", -1));
+                    return Mono.just(new Reply(-1, -1, -1, "", -1, LocalDateTime.now(), LocalDateTime.now()));
                 });
     }
 
