@@ -29,10 +29,10 @@ public class Reply {
 
     private Integer replyvisibleyn;
 
-    @CreatedDate
-    private LocalDateTime insertdt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedt;
+//    @CreatedDate
+//    private LocalDateTime insertdt;
+//
+//    @LastModifiedDate
+//    private LocalDateTime updatedt;
 
 }

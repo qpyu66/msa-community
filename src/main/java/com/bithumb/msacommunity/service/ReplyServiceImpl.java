@@ -2,10 +2,12 @@ package com.bithumb.msacommunity.service;
 
 import com.bithumb.msacommunity.domain.Reply;
 import com.bithumb.msacommunity.repository.ReplyRepository;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Service
@@ -29,10 +31,15 @@ public class ReplyServiceImpl implements ReplyService {
     //https://kogle.tistory.com/285
     public Mono hideReply(Integer replyId) {
         return replyRepository.findById(replyId)
-                .filter(Objects::nonNull) //있는 댓번일때
+                .switchIfEmpty(Mono.error(new RuntimeException(">>>>not found exception")))
+                .log()
                 .filter(item -> item.getReplyvisibleyn()==0) //show상태일떄
                 .doOnNext(item -> item.setReplyvisibleyn(1))
                 .flatMap(item -> replyRepository.save(item))
-                .log();
+                .log()
+                .onErrorResume(tr -> {
+                    return Mono.just(new Reply(-1, -1, -1, "", -1));
+                });
     }
+
 }
