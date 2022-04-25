@@ -37,8 +37,6 @@ public class ReplyHandler {
                 .flatMap(reply -> replyService.hideReply(reply.getReplyid()))
                 .log();
 
-        log.info(">>>>>>>>finished={}", mono.log());
-
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(mono, Reply.class).log("reply hided : ");

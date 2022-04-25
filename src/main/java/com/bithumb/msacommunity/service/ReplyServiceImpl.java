@@ -1,10 +1,13 @@
 package com.bithumb.msacommunity.service;
 
 import com.bithumb.msacommunity.domain.Reply;
+import com.bithumb.msacommunity.domain.UserDTO;
 import com.bithumb.msacommunity.repository.ReplyRepository;
+import com.bithumb.msacommunity.webclient.CommunityWebClient;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ import java.util.Objects;
 public class ReplyServiceImpl implements ReplyService {
 
     private final ReplyRepository replyRepository;
+    CommunityWebClient client;
 
     public ReplyServiceImpl(ReplyRepository replyRepository) {
         this.replyRepository = replyRepository;
@@ -28,13 +32,11 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     //댓글 숨김
-    //TODO:: 에러면 없는 댓입니다~ 하고 뱉어내게 하는 부분
-    //https://kogle.tistory.com/285
     public Mono hideReply(Integer replyId) {
+
         return replyRepository.findById(replyId)
                 .switchIfEmpty(Mono.error(new RuntimeException(">>>>not found exception")))
                 .log()
-//                .filter(item -> item.getReplyvisibleyn()==0) //show상태일떄
                 .doOnNext(item -> item.setReplyvisibleyn(1))
                 .flatMap(item -> replyRepository.save(item))
                 .log()
