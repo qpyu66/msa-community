@@ -20,7 +20,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     //댓글 저장
     @Override
-    public Mono saveReply(Reply reply) {
+    public Mono<Reply> saveReply(Reply reply) {
         return this.replyRepository.save(reply);
     }
 

@@ -1,4 +1,4 @@
-# MSA Team - Member Domain Server
+# MSA Team - Board Domain Server
 
 `현재 접근하신 Repository는 게시판 Domain Server 입니다.`
 

@@ -71,13 +71,7 @@ public class BoardHandler {
                 .body(boardMono, Board.class).log("writeBoard is : ")
                 .onErrorResume(error -> ServerResponse.badRequest().build());
     }
-//    public Mono<ServerResponse> writeBoard(ServerRequest request) {
-//        return request.bodyToMono(Board.class)
-//                .flatMap(board -> boardService.saveBoard(board))
-//                .flatMap(board -> ServerResponse.created(URI.create("/community/" + board.getId()))
-//                        .contentType(APPLICATION_JSON).body(BodyInserters.fromValue(board))).log("writeBoard is : ");
-//    }
-//
+
 
    //게시글 숨기기
     public Mono<ServerResponse> hideArticle(ServerRequest req) {
