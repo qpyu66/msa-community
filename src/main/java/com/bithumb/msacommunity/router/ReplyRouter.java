@@ -16,7 +16,7 @@ public class ReplyRouter {
     public RouterFunction<ServerResponse> route2(ReplyHandler handler) {
         return RouterFunctions
                 .route(POST("/community/reply/write").and(accept(MediaType.APPLICATION_JSON)), handler::writeReply)   // 댓글 작성
-                .andRoute(POST("/community/reply/hide").and(accept(MediaType.APPLICATION_JSON)), handler::hideReply) // 댓글 숨김
+                .andRoute(POST("/community/admin/reply/hide").and(accept(MediaType.APPLICATION_JSON)), handler::hideReply) // 댓글 숨김
                 ;
     }
 

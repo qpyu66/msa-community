@@ -32,7 +32,6 @@ public class ReplyHandler {
     }
 
     // 댓글 숨김
-    //TODO:: 인테저가 아닌 모노로 넘기는 쪽이 더 메이저 해보이니 그쪽으로 수정 예정
     public Mono<ServerResponse> hideReply(ServerRequest req) {
         Mono<Reply> mono = req.bodyToMono(Reply.class)
                 .flatMap(reply -> replyService.hideReply(reply.getReplyid()))
