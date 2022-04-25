@@ -25,7 +25,9 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     //댓글 숨김
-    public Mono<Reply> hideReply(Integer replyId) {
+    //TODO:: 에러면 없는 댓입니다~ 하고 뱉어내게 하는 부분
+    //https://kogle.tistory.com/285
+    public Mono hideReply(Integer replyId) {
         return replyRepository.findById(replyId)
                 .filter(Objects::nonNull) //있는 댓번일때
                 .filter(item -> item.getReplyvisibleyn()==0) //show상태일떄
