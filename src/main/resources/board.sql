@@ -10,7 +10,19 @@ CREATE TABLE IF NOT EXISTS board
     PRIMARY KEY (id)
 );
 
-INSERT INTO board (id, title, content, visibleYn, memberId, insertDt, updateDt)
-VALUES (1, 'title1', 'content1', 0, 1, '2022-04-23 21:11:46', NULL);
+INSERT INTO board (id,title,content,visibleYn,memberId,insertDt,updateDt)
+VALUES (1,'title1','content1',0,'1',now(),NULL);
+
+INSERT INTO board (id,title,content,visibleYn,memberId,insertDt,updateDt)
+VALUES (2,'title2','content1',0,'1',now(),NULL);
+
+INSERT INTO board (id,title,content,visibleYn,memberId,insertDt,updateDt)
+VALUES (3,'title3','content1',1,'1',now(),NULL);
+
+INSERT INTO board (id,title,content,visibleYn,memberId,insertDt,updateDt)
+VALUES (4,'title4','content1',0,'1',now(),NULL);
+
+INSERT INTO board (id,title,content,visibleYn,memberId,insertDt,updateDt)
+VALUES (5,'title5','content1',0,'1',now(),NULL);
 
 

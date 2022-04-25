@@ -14,10 +14,10 @@ public class BoardRouter {
     @Bean
     public RouterFunction<ServerResponse> route(BoardHandler boardHandler) {
         return RouterFunctions
-                .route(GET("/community/list"), boardHandler::getBoardList)                    // 게시판 목록
-//                .andRoute(POST("/community/board/{id}"), boardHandler::)                 // 게시판 열람
+                .route(GET("/community/admin/board/list").and(accept(MediaType.APPLICATION_JSON)), boardHandler::getBoardList) // 게시판 목록
+                .andRoute(POST("/community/admin/board/{id}").and(accept(MediaType.APPLICATION_JSON)), boardHandler::getBoard) // 게시판 열람
                 .andRoute(POST("/community/write").and(accept(MediaType.APPLICATION_JSON)), boardHandler::writeBoard) // 게시글 작성
-                .andRoute(POST("/community/admin/board/hide").and(accept(MediaType.APPLICATION_JSON)), boardHandler::hideArticle)   // 게시글 숨김
+                .andRoute(POST("/community/admin/board/hide").and(accept(MediaType.APPLICATION_JSON)), boardHandler::hideArticle) // 게시글 숨김
                 ;
     }
 
