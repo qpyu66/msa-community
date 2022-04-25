@@ -35,4 +35,6 @@ public class Reply {
     @LastModifiedDate
     private LocalDateTime updatedt;
 
+    public Reply() {
+    }
 }
