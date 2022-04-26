@@ -9,10 +9,14 @@ import com.bithumb.msacommunity.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.h2.message.Trace;
 import org.h2.tools.Server;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -22,6 +26,7 @@ import java.net.URI;
 import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
 @RequiredArgsConstructor
@@ -32,14 +37,16 @@ public class BoardHandler {
 
     /**
      * 게시글 목록을 가져오는 메소드
+     * 첫 번째 페이지는 0번 index, 한 페이지에 보여줄 리스트는 10개, 정렬은 생성시기 내림차순
      * @param request ServerRequest
      * @return flux 를 list 에 모은 후 flatmap 하면서 response body 에 넣기
      */
     public Mono<ServerResponse> getBoardList(ServerRequest request) {
-        Flux<Board> boardFlux = boardRepository.findAll();
-        return boardFlux.collectList().flatMap(b ->
-                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(fromObject(b))
-        );
+        Integer page =  request.queryParam("page").isPresent() ? Integer.parseInt(request.queryParam("page").get()) - 1 : 0;
+        Integer pageSize = request.queryParam("page-size").isPresent() ? Integer.parseInt(request.queryParam("page-size").get()) : 10;
+        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+        return Mono.just(boardRepository.findAllByPage(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.DESC, "insertdt"))))
+                .flatMap(board -> ServerResponse.ok().contentType(APPLICATION_JSON).body(board, Board.class).switchIfEmpty(notFound));
     }
 
     /**
@@ -47,7 +54,7 @@ public class BoardHandler {
      * @param request ServerRequest
      * @return boardContent 를 반환 empty 상태라면 Not Found
      */
-    public Mono<ServerResponse> getBoardContent(ServerRequest request) {
+    public Mono<ServerResponse> getBoard(ServerRequest request) {
         Integer boardId = Integer.valueOf(request.pathVariable("id"));
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
         Mono<Board> boardMono = request.bodyToMono(Board.class)
