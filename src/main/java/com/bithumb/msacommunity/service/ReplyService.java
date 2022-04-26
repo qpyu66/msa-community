@@ -3,6 +3,8 @@ package com.bithumb.msacommunity.service;
 import com.bithumb.msacommunity.domain.Reply;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 public interface ReplyService  {
 
     //댓글 작성

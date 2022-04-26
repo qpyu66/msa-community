@@ -3,8 +3,11 @@ package com.bithumb.msacommunity.handler;
 import ch.qos.logback.classic.LoggerContext;
 import com.bithumb.msacommunity.domain.Board;
 
+import com.bithumb.msacommunity.domain.BoardAggregate;
+import com.bithumb.msacommunity.repository.BoardAggregateRepository;
 import com.bithumb.msacommunity.repository.BoardRepository;
 import com.bithumb.msacommunity.domain.Reply;
+import com.bithumb.msacommunity.service.BoardAggregatorService;
 import com.bithumb.msacommunity.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.h2.message.Trace;
@@ -33,6 +36,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 public class BoardHandler {
 
     private final BoardService boardService;
+    private final BoardAggregateRepository boardAggregateRepository;
     private final BoardRepository boardRepository;
 
     /**
@@ -57,13 +61,20 @@ public class BoardHandler {
     public Mono<ServerResponse> getBoard(ServerRequest request) {
         Integer boardId = Integer.valueOf(request.pathVariable("id"));
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-        Mono<Board> boardMono = request.bodyToMono(Board.class)
-                .flatMap(board -> boardRepository.findById(boardId));
+        Mono<BoardAggregate> boardContent = this.boardAggregateRepository.getBoard(boardId);
+        return boardContent
+                .flatMap(boardAgg ->
+                        ServerResponse.ok().contentType(APPLICATION_JSON)
+                                .body(boardAgg, BoardAggregate.class)
+                                .switchIfEmpty(notFound)
+                );
+        //Mono<Board> boardMono = request.bodyToMono(Board.class)
+                //.flatMap(board -> boardRepository.findById(boardId));
 
-        return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(boardMono, Map.class)
-                .switchIfEmpty(notFound);
+        //return ServerResponse.ok()
+                //.contentType(MediaType.APPLICATION_JSON)
+                //.body(boardMono, Map.class)
+                //.switchIfEmpty(notFound);
     }
 
 
