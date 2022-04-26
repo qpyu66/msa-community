@@ -15,7 +15,7 @@ public class SwaggerConfig
         return GroupedOpenApi.builder()
                 .group("Reply")
                 .pathsToMatch("/community/reply/**")
-                //.addOpenApiCustomiser(getOpenApiCustomiser())
+                .addOpenApiCustomiser(tokenUseCustom())
                 .build();
     }
 
@@ -24,7 +24,7 @@ public class SwaggerConfig
         return GroupedOpenApi.builder()
                 .group("Board")
                 .pathsToMatch("/community/write")
-                //.addOpenApiCustomiser(getOpenApiCustomiser())
+                .addOpenApiCustomiser(tokenUseCustom())
                 .build();
     }
 
@@ -33,7 +33,7 @@ public class SwaggerConfig
         return GroupedOpenApi.builder()
                 .group("BoardList")
                 .pathsToMatch("/community/list")
-                //.addOpenApiCustomiser(getOpenApiCustomiser())
+                .addOpenApiCustomiser(tokenUseCustom())
                 .build();
     }
 
@@ -42,7 +42,7 @@ public class SwaggerConfig
         return GroupedOpenApi.builder()
                 .group("hide")
                 .pathsToMatch("/community/admin/**/hide")
-//                .addOpenApiCustomiser(tokenUseCustom())
+                .addOpenApiCustomiser(tokenUseCustom())
                 .build();
     }
 
@@ -53,7 +53,7 @@ public class SwaggerConfig
                         pathItem.readOperations().stream())
                 .forEach(operation -> {
                     operation.addParametersItem(new Parameter().name("Authorization").in("header").
-                            schema(new StringSchema().example("token")).required(true));
+                            schema(new StringSchema().example("Authorization")).required(true));
 
                 });
     }
