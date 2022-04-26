@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -37,6 +38,7 @@ public class BoardHandler {
 
     private final BoardService boardService;
     private final BoardAggregateRepository boardAggregateRepository;
+    private final BoardAggregatorService boardAggregatorService;
     private final BoardRepository boardRepository;
 
     /**
@@ -59,22 +61,16 @@ public class BoardHandler {
      * @return boardContent 를 반환 empty 상태라면 Not Found
      */
     public Mono<ServerResponse> getBoard(ServerRequest request) {
-        Integer boardId = Integer.valueOf(request.pathVariable("id"));
+        Integer boardId = Integer.valueOf(request.pathVariable("boardId"));
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-        Mono<BoardAggregate> boardContent = this.boardAggregateRepository.getBoard(boardId);
-        return boardContent
-                .flatMap(boardAgg ->
-                        ServerResponse.ok().contentType(APPLICATION_JSON)
-                                .body(boardAgg, BoardAggregate.class)
-                                .switchIfEmpty(notFound)
-                );
-        //Mono<Board> boardMono = request.bodyToMono(Board.class)
-                //.flatMap(board -> boardRepository.findById(boardId));
+        Mono<BoardAggregate> boardMono = request.bodyToMono(BoardAggregate.class)
+                .flatMap(boardAgg ->  boardAggregatorService.getBoard(boardId))
+                .log("boardMono is : ");
 
-        //return ServerResponse.ok()
-                //.contentType(MediaType.APPLICATION_JSON)
-                //.body(boardMono, Map.class)
-                //.switchIfEmpty(notFound);
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(boardMono, BoardAggregate.class).log("getBoard is : ")
+                .switchIfEmpty(notFound);
     }
 
 

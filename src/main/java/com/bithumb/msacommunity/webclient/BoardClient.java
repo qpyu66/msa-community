@@ -11,7 +11,7 @@ public class BoardClient {
     private final WebClient webClient;
 
     public BoardClient(WebClient.Builder builder) {
-        this.webClient = builder.baseUrl("http://localhost:8082/community/admin/board/").build();
+        this.webClient = builder.baseUrl("http://localhost:8082/community/board/").build();
     }
 
     public Mono<Board> getBoard(Integer boardId) {
