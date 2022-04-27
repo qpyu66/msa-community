@@ -28,10 +28,11 @@ public class BoardServiceImpl implements BoardService {
     public Mono<Board> hideBoard(Integer articleId) {
         return boardRepository.findById(articleId)
                 .filter(Objects::nonNull) //있는 댓번일때
-                .filter(item -> item.getVisibleyn()==0) //show상태일떄
+                //.filter(item -> item.getVisibleyn()==0) //show상태일떄
                 .doOnNext(item -> item.setVisibleyn(1))
                 .flatMap(item -> boardRepository.save(item))
                 .log();
+
     }
 
 }
