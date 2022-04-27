@@ -74,7 +74,11 @@ public class BoardHandler {
     }
 
 
-    // 게시글 작성
+    /**
+     * 게시글 작성
+     * @param request 게시글 작성 내용
+     * @return 게시글 정보 저장
+     */
     public Mono<ServerResponse> writeBoard(ServerRequest request) {
         Mono<Board> boardMono = request.bodyToMono(Board.class)
                 .flatMap(board -> boardService.saveBoard(board))
@@ -82,8 +86,7 @@ public class BoardHandler {
 
         return ServerResponse.ok()
                 .contentType(APPLICATION_JSON)
-                .body(boardMono, Board.class).log("writeBoard is : ")
-                .onErrorResume(error -> ServerResponse.badRequest().build());
+                .body(boardMono, Board.class).log("writeBoard is : ");
     }
 
 

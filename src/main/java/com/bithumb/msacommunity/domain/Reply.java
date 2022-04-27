@@ -19,21 +19,21 @@ import java.util.Date;
 @ToString
 public class Reply {
     @Id
-    private Integer replyid;
+    private Integer replyid; //댓글 아이디
 
-    private Integer boardid;
+    private Integer boardid; //게시글 아이디
 
-    private Integer memberid;
+    private Integer memberid; //작성자
 
-    private String replycontent;
+    private String replycontent; //댓글 내용
 
-    private Integer replyvisibleyn;
+    private Integer replyvisibleyn; //댓글 노출 여부
 
     @CreatedDate
-    private LocalDateTime insertdt;
+    private LocalDateTime insertdt; //생성일
 
     @LastModifiedDate
-    private LocalDateTime updatedt;
+    private LocalDateTime updatedt; //수정일
 
     public Reply() {
     }

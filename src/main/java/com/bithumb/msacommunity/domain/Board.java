@@ -22,17 +22,17 @@ public class Board {
     @Id
     private Integer id;
 
-    private String title;
+    private String title; //게시글 제목
 
-    private String content;
+    private String content; //게시글 내용
 
-    private Integer visibleyn;
+    private Integer visibleyn; //게시글 노출 여부
 
-    private Integer memberid;
+    private Integer memberid; //작성자
 
     @CreatedDate
-    private LocalDateTime insertdt;
+    private LocalDateTime insertdt; //생성일
 
     @LastModifiedDate
-    private LocalDateTime updatedt;
+    private LocalDateTime updatedt; //수정일
 }

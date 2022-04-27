@@ -19,7 +19,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 public class ReplyHandler {
     private final ReplyService replyService;
 
-    // 댓글 작성
+    /**
+     * 댓글 작성
+     * @param request 댓글 작성 내용
+     * @return 댓글 정보 저장
+     */
     public Mono<ServerResponse> writeReply(ServerRequest request) {
         Mono<Reply> replyMono = request.bodyToMono(Reply.class)
                 .flatMap(reply -> replyService.saveReply(reply))
@@ -27,8 +31,7 @@ public class ReplyHandler {
 
         return ServerResponse.ok()
                 .contentType(APPLICATION_JSON)
-                .body(replyMono, Reply.class).log("writeReply is : ")
-                .onErrorResume(error -> ServerResponse.badRequest().build());
+                .body(replyMono, Reply.class).log("writeReply is : ");
     }
 
     // 댓글 숨김
