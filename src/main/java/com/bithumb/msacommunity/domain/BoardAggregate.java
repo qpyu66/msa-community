@@ -11,7 +11,10 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "create")
+/**
+ * Board Aggregator dto
+ */
 public class BoardAggregate {
-    private Board board;
-    private List<Reply> replyList;
+    private Board board; // 게시물
+    private List<Reply> replyList; // 댓글 리스트
 }
